@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anh xin lỗi bé!</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container { position: relative; width: 100%; max-width: 600px; }
+
+        img { width: 200px; border-radius: 20px; margin-bottom: 20px; }
+
+        h1 { color: #d32f2f; font-size: 24px; padding: 0 20px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            min-height: 150px;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        #noBtn {
+            background-color: #9e9e9e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            transition: 0.1s;
+        }
+
+        .success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .success-screen h2 { color: #ff4d6d; font-size: 32px; animation: heartBeat 1s infinite; }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainContent" class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1ZjR4bmY0bmh1ZzRyeG5ybmxyeG5ybmxyeG5ybmxyeG5yJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdEG8wN7koEwv/giphy.gif" alt="Bé gấu">
+        
+        <h1>Anh xin lỗi bé, anh sai rồi bé cho anh xin lỗi nhá</h1>
+
+        <div class="btn-group">
+            <button id="yesBtn" onclick="showSuccess()">Có</button>
+            <button id="noBtn" onmouseover="handleNoMove()">Không</button>
+        </div>
+    </div>
+
+    <div id="successContent" class="success-screen">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1ZjR4bmY0bmh1ZzRyeG5ybmxyeG5ybmxyeG5ybmxyeG5yJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/KztT2c4u8mYYUiCiY6/giphy.gif">
+        <h2>Dạ, cảm ơn em đã tha lỗi cho anh, yêu ạ ❤️</h2>
+    </div>
+
+    <script>
+        let yesSize = 18;
+
+        function handleNoMove() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+
+            // 1. Nút "Không" nhảy liên tục
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            // 2. Nút "Có" to dần (x1.5 theo logic ảnh bạn gửi)
+            yesSize *= 1.5;
+            yesBtn.style.fontSize = `${yesSize}px`;
+            yesBtn.style.padding = `${yesSize/2}px ${yesSize}px`;
+
+            // Nếu nút Có quá to, che hết màn hình
+            if(yesSize > 500) {
+                showSuccess();
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('successContent').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
