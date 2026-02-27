@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi Bé Yêu</title>
+    <title>Anh xin lỗi bé!</title>
     <style>
         body {
             display: flex;
@@ -15,13 +15,11 @@
             background-color: #fff5f7;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
+            text-align: center;
         }
 
-        /* Container chính */
-        #mainContainer { text-align: center; }
-
-        .gif-container img {
-            width: 230px;
+        #mainContainer img {
+            width: 200px;
             border-radius: 15px;
             margin-bottom: 20px;
         }
@@ -30,7 +28,6 @@
             color: #d32f2f;
             font-size: 24px;
             margin-bottom: 30px;
-            padding: 0 20px;
         }
 
         .btn-group {
@@ -41,35 +38,33 @@
             min-height: 200px;
         }
 
-        /* Nút Có */
         #yesBtn {
             background-color: #ff4d6d;
             color: white;
             border: none;
             padding: 15px 30px;
-            font-size: 20px;
+            font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        /* Nút Không - Phải có position: absolute để nhảy được */
         #noBtn {
             background-color: #9e9e9e;
             color: white;
             border: none;
             padding: 15px 30px;
-            font-size: 20px;
+            font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
-            position: absolute; 
+            position: absolute;
             transition: 0.1s;
         }
 
-        /* Màn hình thành công */
         #successContent {
             display: none;
-            text-align: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         #successContent h2 {
@@ -82,44 +77,40 @@
 <body>
 
     <div id="mainContainer">
-        <div class="gif-container">
-            <img id="bearImg" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ0ZzR3eW14bmF6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/KztT2c4u8mYYUiCiY6/giphy.gif" alt="Cute Bear">
-        </div>
-        
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1ZjR4bmY0bmh1ZzRyeG5ybmxyeG5ybmxyeG5ybmxyeG5yJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdEG8wN7koEwv/giphy.gif" alt="Cute Bear">
         <h1>Anh xin lỗi bé, anh sai rồi bé cho anh xin lỗi nhá</h1>
 
         <div class="btn-group">
-            <button id="yesBtn" onclick="handleYesClick()">Có</button>
-            <button id="noBtn" onmouseover="handleNoHover()">Không</button>
+            <button id="yesBtn" onclick="handleYes()">Có</button>
+            <button id="noBtn" onmouseover="moveNoButton()">Không</button>
         </div>
     </div>
 
     <div id="successContent">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ0ZzR3eW14bmF6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdEG8wN7koEwv/giphy.gif" width="250">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ0ZzR3eW14bmF6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6bmZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/KztT2c4u8mYYUiCiY6/giphy.gif" width="250">
         <h2>Dạ, cảm ơn em đã tha lỗi cho anh, yêu ạ ❤️</h2>
     </div>
 
     <script>
-        function handleNoHover() {
+        function moveNoButton() {
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
 
-            // 1. Nút "Không" nhảy vị trí ngẫu nhiên
+            // 1. Nút "Không" nhảy đi chỗ khác
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
 
-            // 2. Logic tăng size nút "Có" x1.5 như trong ảnh của bạn
+            // 2. Nút "Có" to lên gấp 1.5 lần (Theo logic ảnh mẫu)
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = `${currentSize * 1.5}px`;
-            yesBtn.style.padding = `${(currentSize * 1.5)/2}px ${currentSize * 1.5}px`;
+            yesBtn.style.padding = `${(currentSize * 1.5) / 2}px ${currentSize * 1.5}px`;
         }
 
-        function handleYesClick() {
+        function handleYes() {
             document.getElementById('mainContainer').style.display = 'none';
-            document.getElementById('successContent').style.display = 'block';
+            document.getElementById('successContent').style.display = 'flex';
         }
     </script>
 </body>
